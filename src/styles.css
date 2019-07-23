@@ -1,3 +1,43 @@
 body {
-  font-family: sans-serif;
+  font-family: "Raleway", sans-serif;
+}
+
+h1 {
+  font-family: "Geostar", cursive;
+  margin: 0 auto;
+}
+
+#grid {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: gray;
+
+  display: grid;
+  column-gap: 0;
+  grid-auto-rows: minmax(1fr, auto);
+  grid-template-columns: repeat(16, 1fr);
+}
+
+#grid div {
+  margin: 0;
+  padding: 0;
+  height: 25px;
+  width: 25px;
+}
+
+#grid div:hover {
+  background-color: red;
+}
+
+.attributions {
+  font-size: 0.6rem;
+}
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0.7rem 0 1rem 0;
+  background-color: lightgoldenrodyellow;
+  text-align: center;
 }
