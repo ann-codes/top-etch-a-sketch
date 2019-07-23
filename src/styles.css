@@ -1,3 +1,4 @@
+/* GLOBAL */
 body {
   font-family: "Raleway", sans-serif;
 }
@@ -7,6 +8,7 @@ h1 {
   margin: 0 auto;
 }
 
+/* GRID APP */
 #grid {
   max-width: 400px;
   margin: 0 auto;
@@ -25,13 +27,20 @@ h1 {
   width: 25px;
 }
 
-#grid div:hover {
+.red {
   background-color: red;
 }
 
+.clear {
+  /* background-color: blue; */
+  background-color: inherit;
+}
+
+/* FOOTER */
 .attributions {
   font-size: 0.6rem;
 }
+
 footer {
   position: fixed;
   left: 0;

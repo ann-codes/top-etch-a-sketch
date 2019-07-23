@@ -10,3 +10,16 @@ const makeGrid = function(gridRow, gridCol) {
 };
 
 makeGrid(gridRow, gridCol);
+
+const sketchPad = document.querySelector("div#grid");
+const clearButton = document.querySelector("#clear");
+
+sketchPad.addEventListener("mouseover", e => {
+  e.target.style.backgroundColor = "red";
+});
+
+clearButton.addEventListener("click", e => {
+  document.querySelectorAll(".red").forEach(el => el.classList.add("clear"));
+});
+
+//https://www.w3schools.com/cssref/tryit.asp?filename=trycss_js_grid-template-rows
