@@ -1,15 +1,15 @@
-let gridRow = 16;
-let gridCol = 16;
+let sides = 16;
 
-const makeGrid = function(gridRow, gridCol) {
-  for (let i = 0; i < gridRow * gridCol; i++) {
+const makeGrid = function(sides) {
+  for (let i = 0; i < sides * sides; i++) {
     const loc = document.querySelector("#grid");
     const div = document.createElement("div");
+    div.classList.add("square");
     loc.appendChild(div);
   }
 };
 
-makeGrid(gridRow, gridCol);
+makeGrid(sides);
 
 const sketchPad = document.querySelector("div#grid");
 const clearButton = document.querySelector("#clear");
@@ -19,7 +19,6 @@ sketchPad.addEventListener("mouseover", e => {
 });
 
 clearButton.addEventListener("click", e => {
-  document.querySelectorAll(".red").forEach(el => el.classList.add("clear"));
+  const square = document.querySelectorAll(".square");
+  square.forEach(div => (div.style.backgroundColor = "gray"));
 });
-
-//https://www.w3schools.com/cssref/tryit.asp?filename=trycss_js_grid-template-rows
