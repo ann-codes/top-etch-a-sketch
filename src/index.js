@@ -14,7 +14,7 @@ const makeGrid = sides => {
   square.forEach(div => (div.style.cssText = squareCSS));
 };
 
-makeGrid(sides);
+// makeGrid(sides);
 
 // destroy grid to remake
 const killGrid = () => {
@@ -43,6 +43,22 @@ draw("black");
 const eraser = document.querySelector("#eraser");
 eraser.addEventListener("click", e => draw("#c4c4c4"));
 
+// draw shades of black
+const drawShade = () => {
+  sketchPad.addEventListener("mouseover", e => {
+    let opacity = 0;
+    e.target.style.backgroundColor = "black";
+    if (e.target.style.opacity < 1) {
+      opacity += 0.1;
+      e.target.style.opacity = opacity;
+      console.log(opacity);
+    }
+  });
+};
+
+const shade = document.querySelector("#shade");
+shade.addEventListener("click", e => drawShade());
+
 // allowing to pick colors
 const colorPicker = document.querySelector("#colorPicker");
 colorPicker.addEventListener("change", e => {
@@ -68,7 +84,7 @@ rainbow.addEventListener("click", e => drawRainbow());
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", e => cleanGrid());
 
-// changing the number of sides
+// change the number of sides
 const sidesButton = document.querySelector("#sides");
 sidesButton.addEventListener("click", e => {
   sides = document.querySelector("#sidesValue").value;
@@ -81,3 +97,5 @@ sidesButton.addEventListener("click", e => {
     cleanGrid();
   }
 });
+
+window.onload = makeGrid(sides);
