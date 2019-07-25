@@ -14,8 +14,6 @@ const makeGrid = sides => {
   square.forEach(div => (div.style.cssText = squareCSS));
 };
 
-// makeGrid(sides);
-
 // destroy grid to remake
 const killGrid = () => {
   const square = document.querySelectorAll(".square");
@@ -46,12 +44,11 @@ eraser.addEventListener("click", e => draw("#c4c4c4"));
 // draw shades of black
 const drawShade = () => {
   sketchPad.addEventListener("mouseover", e => {
-    let opacity = 0;
     e.target.style.backgroundColor = "black";
-    if (e.target.style.opacity < 1) {
+    let opacity = Number(e.target.style.opacity);
+    if (e.target.style.opacity <= 1) {
       opacity += 0.1;
-      e.target.style.opacity = opacity;
-      console.log(opacity);
+      e.target.style.opacity = opacity.toFixed(1);
     }
   });
 };
