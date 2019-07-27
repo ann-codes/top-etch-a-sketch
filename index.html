@@ -15,28 +15,25 @@
       <h1>Etch-A-Sketch</h1>
       <div id="grid"></div>
 
-      <div>
-        <button id="clear">Clear Sketch</button>
-        <button id="eraser">Eraser</button>
-        <button id="shade">Shader</button>
+      <div class="controls">
+        <div class="knob" id="clear"><p>clear</p></div>
+        <div>
+          <span class="button" id="black">Black</span>
+          <span class="button" id="shade"><strike>Shader</strike></span> 
+          <span class="button" id="rainbow">Rainbow</span>
+        </div>
+        <div class="knob" id="eraser"><p>eraser</p></div>
       </div>
+    </div>
 
+    <div class="extra" >
       <div>
-        Pick your color!
+        <p>Pick Your Color!</p>
         <input type="color" id="colorPicker" value="#000000" />
-        <button id="rainbow">Rainbow</button>
       </div>
-
-      <div>
-        <input
-          id="sidesValue"
-          type="number"
-          min="2"
-          max="100"
-          size="3"
-          placeholder="2 - 100"
-        />
-        <button id="sides">Change Size!</button>
+      <div>    
+        <p id="sides">Change Size!</p>
+        <input id="sidesValue" type="number" min="2" max="100" placeholder="2 - 100"/>
       </div>
     </div>
 

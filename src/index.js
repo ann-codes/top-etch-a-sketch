@@ -37,24 +37,27 @@ const draw = color => {
 
 draw("black");
 
+// draw black
+document.querySelector("#black").addEventListener("click", e => draw("black"));
+
 // eraser function
 const eraser = document.querySelector("#eraser");
 eraser.addEventListener("click", e => draw("#c4c4c4"));
 
-// draw shades of black
-const drawShade = () => {
-  sketchPad.addEventListener("mouseover", e => {
-    e.target.style.backgroundColor = "black";
-    let opacity = Number(e.target.style.opacity);
-    if (e.target.style.opacity <= 1) {
-      opacity += 0.1;
-      e.target.style.opacity = opacity.toFixed(1);
-    }
-  });
-};
+// draw shades of black --- HIDE FOR NOW
+// const drawShade = () => {
+//   sketchPad.addEventListener("mouseover", e => {
+//     e.target.style.backgroundColor = "black";
+//     let opacity = Number(e.target.style.opacity);
+//     if (e.target.style.opacity <= 1) {
+//       opacity += 0.1;
+//       e.target.style.opacity = opacity.toFixed(1);
+//     }
+//   });
+// };
 
-const shade = document.querySelector("#shade");
-shade.addEventListener("click", e => drawShade());
+// const shade = document.querySelector("#shade");
+// shade.addEventListener("click", e => drawShade());
 
 // allowing to pick colors
 const colorPicker = document.querySelector("#colorPicker");
