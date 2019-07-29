@@ -1,4 +1,5 @@
 let sides = 16;
+let mode = "shader"; // black, eraser, color, rainbow, shader
 
 const makeGrid = sides => {
   let sizeFr = `grid-template-columns: repeat(${sides}, 1fr)`;
@@ -21,72 +22,78 @@ const killGrid = () => {
 };
 
 // erase exsiting grid
-const cleanGrid = () => {
+const clearGrid = () => {
   const square = document.querySelectorAll(".square");
   square.forEach(div => (div.style.backgroundColor = "#c4c4c4"));
+  square.forEach(div => (div.style.opacity = 1.1));
 };
 
-const sketchPad = document.querySelector("div#grid");
-
-// draw function
-const draw = color => {
+// draw function depending on mode
+const drawMode = color => {
+  const sketchPad = document.querySelector("div#grid");
   sketchPad.addEventListener("mouseover", e => {
-    e.target.style.backgroundColor = color;
+    if (mode === "black") {
+      color = "black";
+      e.target.style.backgroundColor = color;
+      e.target.style.opacity = 1.1;
+    } else if (mode === "eraser") {
+      color = "#c4c4c4";
+      e.target.style.backgroundColor = color;
+      e.target.style.opacity = 1.1;
+    } else if (mode === "color") {
+      color = document.querySelector("#colorPicker").value;
+      e.target.style.backgroundColor = color;
+      e.target.style.opacity = 1.1;
+    } else if (mode === "rainbow") {
+      let r1 = Math.floor(Math.random() * Math.floor(255));
+      let r2 = Math.floor(Math.random() * Math.floor(255));
+      let r3 = Math.floor(Math.random() * Math.floor(255));
+      let color = `rgb(${r1},${r2},${r3})`;
+      e.target.style.backgroundColor = color;
+      e.target.style.opacity = 1.1;
+    } else if (mode === "shader") {
+      e.target.style.backgroundColor = "black";
+      let opacity = Number(e.target.style.opacity);
+      if (e.target.style.opacity < 1) {
+        opacity += 0.1;
+        e.target.style.opacity = opacity.toFixed(1);
+      } else if (e.target.style.opacity > 1) {
+        e.target.style.opacity = 0.1;
+      }
+    }
   });
 };
-
-draw("black");
-
-// draw black
-document.querySelector("#black").addEventListener("click", e => draw("black"));
-
-// eraser function
-const eraser = document.querySelector("#eraser");
-eraser.addEventListener("click", e => draw("#c4c4c4"));
-
-// draw shades of black --- HIDE FOR NOW
-// const drawShade = () => {
-//   sketchPad.addEventListener("mouseover", e => {
-//     e.target.style.backgroundColor = "black";
-//     let opacity = Number(e.target.style.opacity);
-//     if (e.target.style.opacity <= 1) {
-//       opacity += 0.1;
-//       e.target.style.opacity = opacity.toFixed(1);
-//     }
-//   });
-// };
-
-// const shade = document.querySelector("#shade");
-// shade.addEventListener("click", e => drawShade());
-
-// allowing to pick colors
-const colorPicker = document.querySelector("#colorPicker");
-colorPicker.addEventListener("change", e => {
-  let pickedColor = document.querySelector("#colorPicker").value;
-  draw(pickedColor);
-});
-
-// random colors
-const drawRainbow = () => {
-  sketchPad.addEventListener("mouseover", e => {
-    let r1 = Math.floor(Math.random() * Math.floor(255));
-    let r2 = Math.floor(Math.random() * Math.floor(255));
-    let r3 = Math.floor(Math.random() * Math.floor(255));
-    let color = `rgb(${r1},${r2},${r3})`;
-    e.target.style.backgroundColor = color;
-  });
-};
-
-const rainbow = document.querySelector("#rainbow");
-rainbow.addEventListener("click", e => drawRainbow());
 
 // clearing the drawing
-const clearButton = document.querySelector("#clear");
-clearButton.addEventListener("click", e => cleanGrid());
+document.querySelector("#clear").addEventListener("click", e => clearGrid());
+
+// draw black
+document.querySelector("#black").addEventListener("click", e => {
+  mode = "black";
+});
+
+// eraser
+document.querySelector("#eraser").addEventListener("click", e => {
+  mode = "eraser";
+});
+
+// allowing to pick colors
+document.querySelector("#colorPicker").addEventListener("change", e => {
+  mode = "color";
+});
+
+// raindbow random colors
+document.querySelector("#rainbow").addEventListener("click", e => {
+  mode = "rainbow";
+});
+
+// draw shades of black
+document.querySelector("#shade").addEventListener("click", e => {
+  mode = "shader";
+});
 
 // change the number of sides
-const sidesButton = document.querySelector("#sides");
-sidesButton.addEventListener("click", e => {
+document.querySelector("#sides").addEventListener("click", e => {
   sides = document.querySelector("#sidesValue").value;
   if (sides >= 101 || sides <= 1) {
     alert("Please submit a number between 2 or 100!");
@@ -94,8 +101,12 @@ sidesButton.addEventListener("click", e => {
   } else {
     killGrid();
     makeGrid(sides);
-    cleanGrid();
   }
 });
 
-window.onload = makeGrid(sides);
+const start = () => {
+  makeGrid(sides);
+  drawMode();
+};
+
+window.onload = start();

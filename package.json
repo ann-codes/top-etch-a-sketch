@@ -1,7 +1,7 @@
 {
   "name": "top-etch-a-sketch",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "Final",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
