@@ -33,23 +33,19 @@ const drawMode = color => {
   const sketchPad = document.querySelector("div#grid");
   sketchPad.addEventListener("mouseover", e => {
     if (mode === "black") {
-      color = "black";
-      e.target.style.backgroundColor = color;
+      e.target.style.backgroundColor = "black";
       e.target.style.opacity = 1.1;
     } else if (mode === "eraser") {
-      color = "#c4c4c4";
-      e.target.style.backgroundColor = color;
+      e.target.style.backgroundColor = "#c4c4c4";
       e.target.style.opacity = 1.1;
     } else if (mode === "color") {
-      color = document.querySelector("#colorPicker").value;
-      e.target.style.backgroundColor = color;
+      e.target.style.backgroundColor = document.querySelector("#colorPicker").value;
       e.target.style.opacity = 1.1;
     } else if (mode === "rainbow") {
       let r1 = Math.floor(Math.random() * Math.floor(255));
       let r2 = Math.floor(Math.random() * Math.floor(255));
       let r3 = Math.floor(Math.random() * Math.floor(255));
-      let color = `rgb(${r1},${r2},${r3})`;
-      e.target.style.backgroundColor = color;
+      e.target.style.backgroundColor = `rgb(${r1},${r2},${r3})`;
       e.target.style.opacity = 1.1;
     } else if (mode === "shader") {
       e.target.style.backgroundColor = "black";
@@ -64,33 +60,13 @@ const drawMode = color => {
   });
 };
 
-// clearing the drawing
+// change mode event listeners
 document.querySelector("#clear").addEventListener("click", e => clearGrid());
-
-// draw black
-document.querySelector("#black").addEventListener("click", e => {
-  mode = "black";
-});
-
-// eraser
-document.querySelector("#eraser").addEventListener("click", e => {
-  mode = "eraser";
-});
-
-// allowing to pick colors
-document.querySelector("#colorPicker").addEventListener("change", e => {
-  mode = "color";
-});
-
-// raindbow random colors
-document.querySelector("#rainbow").addEventListener("click", e => {
-  mode = "rainbow";
-});
-
-// draw shades of black
-document.querySelector("#shade").addEventListener("click", e => {
-  mode = "shader";
-});
+document.querySelector("#black").addEventListener("click", e => {mode = "black"});
+document.querySelector("#eraser").addEventListener("click", e => {mode = "eraser"});
+document.querySelector("#colorPicker").addEventListener("change", e => {mode = "color"});
+document.querySelector("#rainbow").addEventListener("click", e => {mode = "rainbow"});
+document.querySelector("#shade").addEventListener("click", e => {mode = "shader"});
 
 // change the number of sides
 document.querySelector("#sides").addEventListener("click", e => {
@@ -108,5 +84,4 @@ const start = () => {
   makeGrid(sides);
   drawMode();
 };
-
 window.onload = start();
